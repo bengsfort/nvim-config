@@ -666,6 +666,7 @@ require('lazy').setup({
             },
           },
         },
+        zls = {},
         gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
