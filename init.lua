@@ -1014,6 +1014,27 @@ require('lazy').setup({
   -- Or use telescope!
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
+  {
+    'andweeb/presence.nvim',
+    opts = {
+      -- General opts
+      auto_update = true,
+      neovim_image_text = 'neovim',
+      main_image = 'neovim',
+      blacklist = {}, -- TODO: Make sure we dont show OP stuff...
+      show_time = true,
+      enable_line_number = true,
+
+      -- Rich presence text opts
+      editing_text = 'Editing %s',
+      file_explorer_text = 'Browsing %s',
+      git_commit_text = 'Committing changes',
+      plugin_manager_text = 'Getting lost in plugins',
+      reading_text = 'Reading %s',
+      workspace_text = 'Working on %s',
+      line_number_text = 'Line %s out of %s',
+    },
+  },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
