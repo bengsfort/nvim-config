@@ -525,6 +525,9 @@ require('lazy').setup({
         end,
       })
 
+      -- Cache eslint base attach
+      local base_eslint_on_attach = vim.lsp.config.eslint.on_attach
+
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --  See `:help lsp-config` for information about keys and how to configure
@@ -549,10 +552,18 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {},
         eslint = {
+          settings = {
+            experimental = {
+              useFlatConfig = true
+            },
+          },
           on_attach = function(client, bufnr)
+            if not base_eslint_on_attach then return end
+
+            base_eslint_on_attach(client, bufnr)
             vim.api.nvim_create_autocmd('BufWritePre', {
               buffer = bufnr,
-              command = 'EslintFixAll',
+              command = 'LspEslintFixAll',
             })
           end,
         },
