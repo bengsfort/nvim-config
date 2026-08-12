@@ -552,6 +552,12 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {},
         eslint = {
+          root_markers = {
+            'eslint.config.js',
+            'eslint.config.ts',
+            'eslint.config.mjs',
+            'eslint.config.mts'
+          },
           settings = {
             experimental = {
               useFlatConfig = true
