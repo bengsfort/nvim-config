@@ -567,6 +567,28 @@ require('lazy').setup({
             })
           end,
         },
+        astro = {
+          before_init = function(_, config)
+            local util = require('lspconfig.util')
+            local tsdk = util.get_typescript_server_path(config.root_dir)
+
+            if tsdk == '' then
+              local npm_root = vim.fn.systemlist('pnpm root -g')
+              if vim.v.shell_error == 0 and npm_root[1] then
+                tsdk = npm_root[1] .. '/typescript/lib'
+              end
+            end
+
+            config.init_options = config.init_options or {}
+            config.init_options.typescript = config.init_options.typescript or {}
+            config.init_options.typescript.tsdk = tsdk
+          end,
+          root_markers = {
+            { 'astro.config.mjs', 'astro.config.js' },
+            'package.json',
+            'tsconfig.json'
+          },
+        },
         markdownlint = {},
         cssls = {},
         css_variables = {},
